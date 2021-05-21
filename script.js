@@ -20,10 +20,13 @@ let mediaRecorder;
 
     mediaRecorder.onstop = function(e){
         console.log("on Stop");
+        
     }
 
     mediaRecorder.ondataavailable = function(e){
         console.log("on data available");
+        recordedData = e.data;
+        saveVideotoFS()
     }
     console.log(mediaRecorder);
 
@@ -40,4 +43,39 @@ let mediaRecorder;
         }
         recordingState=!recordingState
     })
+
+    photoButton.addEventListener("click", function(e){
+        capturePhotos()
+    })
 })();
+
+function saveVideotoFS()
+{
+    console.log("Saving video");
+    let videoUrl = URL.createObjectURL(recordedData)
+    console.log(videoUrl);
+
+    let aTag = document.createElement("a")
+    aTag.download = "video.mp4"
+    aTag.href = videoUrl;
+    
+    aTag.click();
+    aTag.remove();
+
+}
+
+function capturePhotos()
+{
+    let canvas = document.createElement("canvas")
+    canvas.height = window.innerHeight
+    canvas.width = window.innerWidth
+
+    let ctx = canvas.getContext('2d')
+    ctx.drawImage(videoPlayer, 0, 0)
+    let imageUrl = canvas.toDataURL("image/jpg")
+    let aTag = document.createElement("a")
+    aTag.download = "img.jpg"
+    aTag.href = imageUrl;
+    aTag.click();
+    aTag.remove();
+}

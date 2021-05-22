@@ -1,9 +1,15 @@
 let videoPlayer = document.querySelector("video")
 let recordButton = document.querySelector("#record-video")
 let photoButton = document.querySelector("#capture-photo")
+let zoomIn = document.querySelector(".in")
+let zoomOut = document.querySelector(".out")
 let constraints = {video:true};
 let recordedData;
 let mediaRecorder;
+
+let curZoom = 1
+let minZoom = 1;
+let maxZoom = 3;  
 
 
 (async function(){
@@ -28,18 +34,17 @@ let mediaRecorder;
         recordedData = e.data;
         saveVideotoFS()
     }
-    console.log(mediaRecorder);
 
     recordButton.addEventListener("click", function(e){
         if(recordingState)
         {
             mediaRecorder.stop();
-            recordButton.innerHTML = "Record"
+            recordButton.querySelector("div").classList.remove("record-animate")
         }
         else
         {
             mediaRecorder.start();
-            recordButton.innerHTML = "Recording"
+            recordButton.querySelector("div").classList.add("record-animate")
         }
         recordingState=!recordingState
     })
@@ -47,13 +52,24 @@ let mediaRecorder;
     photoButton.addEventListener("click", function(e){
         capturePhotos()
     })
+
+    zoomIn.addEventListener("click", function(e){
+        if(curZoom+0.1<=maxZoom)
+            curZoom+=0.1
+        videoPlayer.style.transform = `scale(${curZoom})`
+    });
+    
+    zoomOut.addEventListener("click", function(e){
+        if(curZoom-0.1>=minZoom)
+            curZoom-=0.1
+        videoPlayer.style.transform = `scale(${curZoom})`
+    });
+
 })();
 
 function saveVideotoFS()
 {
-    console.log("Saving video");
     let videoUrl = URL.createObjectURL(recordedData)
-    console.log(videoUrl);
 
     let aTag = document.createElement("a")
     aTag.download = "video.mp4"
@@ -65,17 +81,33 @@ function saveVideotoFS()
 }
 
 function capturePhotos()
-{
-    let canvas = document.createElement("canvas")
-    canvas.height = window.innerHeight
-    canvas.width = window.innerWidth
+{   
+    photoButton.querySelector("div").classList.add("capture-animate")
+    setTimeout(function(){
+        photoButton.querySelector("div").classList.remove("capture-animate")
+    },500)
 
+    let canvas = document.createElement("canvas")
     let ctx = canvas.getContext('2d')
+    canvas.height = videoPlayer.videoHeight;
+    canvas.width = videoPlayer.videoWidth
+
+    if(curZoom!=1)
+    {
+        ctx.translate(canvas.width/2, canvas.height/2);
+        ctx.scale(curZoom, curZoom);
+        ctx.translate(-canvas.width/2, -canvas.height/2)
+    }
+
     ctx.drawImage(videoPlayer, 0, 0)
     let imageUrl = canvas.toDataURL("image/jpg")
     let aTag = document.createElement("a")
     aTag.download = "img.jpg"
     aTag.href = imageUrl;
     aTag.click();
-    aTag.remove();
+}
+
+function scaleScreen()
+{
+
 }

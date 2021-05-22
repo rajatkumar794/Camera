@@ -11,8 +11,20 @@
     <div class="video-container">
         <video autoplay></video>
     </div>
-    <button id="record-video">Record</button>
-    <button id="capture-photo">Capture</button>
+
+    <div class="media-controls">
+        <div class="zoomInOut" style="transform: scale(1);">
+            <div class="in">+</div>
+            <div class="out">-</div>
+        </div>
+        <div id="record-video">
+            <div class="record-video-animate"></div>
+        </div>
+        <div id="capture-photo">
+            <div class="capture-photo-animate"></div>
+        </div>    
+    </div>
+    
     <script src="./script.js"></script>
 </body>
 </html>

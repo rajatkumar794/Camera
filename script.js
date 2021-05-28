@@ -71,12 +71,19 @@ function saveVideotoFS()
 {
     let videoUrl = URL.createObjectURL(recordedData)
 
-    let aTag = document.createElement("a")
-    aTag.download = "video.mp4"
-    aTag.href = videoUrl;
+    let iv = setInterval(function(){
+        if(db)
+        {   saveMedia("video", videoUrl)
+            clearInterval(iv)
+        }
+    },100);
+
+    // let aTag = document.createElement("a")
+    // aTag.download = "video.mp4"
+    // aTag.href = videoUrl;
     
-    aTag.click();
-    aTag.remove();
+    // aTag.click();
+    // aTag.remove();
 
 }
 
@@ -101,10 +108,19 @@ function capturePhotos()
 
     ctx.drawImage(videoPlayer, 0, 0)
     let imageUrl = canvas.toDataURL("image/jpg")
-    let aTag = document.createElement("a")
-    aTag.download = "img.jpg"
-    aTag.href = imageUrl;
-    aTag.click();
+    
+    let iv = setInterval(function(){
+        if(db)
+        {   saveMedia("image", imageUrl)
+            clearInterval(iv)
+        }
+    },100);
+
+    //skipping downloading part
+    // let aTag = document.createElement("a")
+    // aTag.download = "img.jpg"
+    // aTag.href = imageUrl;
+    // aTag.click();
 }
 
 function scaleScreen()

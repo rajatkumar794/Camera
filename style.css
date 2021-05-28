@@ -140,11 +140,12 @@ video{
 }
 
 .filter1{
-  filter: saturate(500%)
+  filter: saturate(300%)
 }
 
 .filter2{
-  filter: sepia(100%)
+  filter: sepia(100%) drop-shadow(16px 16px 10px black);
+
 }
 
 .filter3{
@@ -152,7 +153,7 @@ video{
 }
 
 .filter4{
-  filter: hue-rotate(180deg) saturate(3.5);
+  filter: hue-rotate(180deg) saturate(1.5);
 }
 
 .filter5{

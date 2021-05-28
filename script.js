@@ -4,6 +4,8 @@ let photoButton = document.querySelector("#capture-photo")
 let zoomIn = document.querySelector(".in")
 let zoomOut = document.querySelector(".out")
 let filters = document.querySelectorAll(".filters")
+let gallery = document.querySelectorAll(".gallery")
+
 let constraints = {video:true};
 let recordedData;
 let mediaRecorder;

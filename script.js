@@ -3,14 +3,15 @@ let recordButton = document.querySelector("#record-video")
 let photoButton = document.querySelector("#capture-photo")
 let zoomIn = document.querySelector(".in")
 let zoomOut = document.querySelector(".out")
+let filters = document.querySelectorAll(".filters")
 let constraints = {video:true};
 let recordedData;
 let mediaRecorder;
 
-let curZoom = 1
+let curZoom = 1;
 let minZoom = 1;
 let maxZoom = 3;  
-
+let curFilter="";
 
 (async function(){
 
@@ -65,6 +66,10 @@ let maxZoom = 3;
         videoPlayer.style.transform = `scale(${curZoom})`
     });
 
+    for(let i=0; i<filters.length; ++i)
+    {
+        filters[i].addEventListener("click", addFilter)
+    }
 })();
 
 function saveVideotoFS()
@@ -123,7 +128,12 @@ function capturePhotos()
     // aTag.click();
 }
 
-function scaleScreen()
+function addFilter(e)
 {
-
+    let newFilter = e.path[1].classList[1];
+    if(newFilter==curFilter)
+        curFilter=""
+    else
+        curFilter=newFilter
+    videoPlayer.classList=curFilter
 }

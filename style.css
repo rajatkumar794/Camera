@@ -110,3 +110,51 @@ video{
     transform: scale(1);
   }
 }
+
+.filter-controls{
+  height: 500px;
+  width: 130px;
+  top: 15%;
+  left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  background: white;
+}
+.filter-controls>div{
+  height: 100px;
+  width: 130px;
+  border-radius: 50%;
+  border: 8px solid white;
+  display: flex;
+  background: chocolate;
+  justify-content: center;
+  align-items: center;
+}
+
+.testImage{
+  height: 100px;
+  width: 130px;
+}
+
+.filter1{
+  filter: saturate(500%)
+}
+
+.filter2{
+  filter: sepia(100%)
+}
+
+.filter3{
+  filter: hue-rotate(90deg)
+}
+
+.filter4{
+  filter: hue-rotate(180deg) saturate(3.5);
+}
+
+.filter5{
+  filter: grayscale(100%)
+}

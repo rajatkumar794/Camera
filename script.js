@@ -4,7 +4,6 @@ let photoButton = document.querySelector("#capture-photo")
 let zoomIn = document.querySelector(".in")
 let zoomOut = document.querySelector(".out")
 let filters = document.querySelectorAll(".filters")
-let gallery = document.querySelectorAll(".gallery")
 
 let constraints = {video:true};
 let recordedData;
@@ -76,22 +75,14 @@ let curFilter="";
 
 function saveVideotoFS()
 {
-    let videoUrl = URL.createObjectURL(recordedData)
-
-    let iv = setInterval(function(){
-        if(db)
-        {   saveMedia("video", videoUrl)
-            clearInterval(iv)
-        }
-    },100);
-
-    // let aTag = document.createElement("a")
-    // aTag.download = "video.mp4"
-    // aTag.href = videoUrl;
+    let blob = new Blob( [recordedData] , {type:"video/mp4"} );
     
-    // aTag.click();
-    // aTag.remove();
-
+    let iv = setInterval( function(){
+        if(db){
+        saveMedia("video" , blob);
+        clearInterval(iv);
+        }
+    }  , 100 );
 }
 
 function capturePhotos()
@@ -122,12 +113,6 @@ function capturePhotos()
             clearInterval(iv)
         }
     },100);
-
-    //skipping downloading part
-    // let aTag = document.createElement("a")
-    // aTag.download = "img.jpg"
-    // aTag.href = imageUrl;
-    // aTag.click();
 }
 
 function addFilter(e)

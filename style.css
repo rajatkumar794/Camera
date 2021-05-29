@@ -19,6 +19,7 @@
 video{
   height: 100%;
   width: 100%;
+  -webkit-transform:rotateY(180deg);
 }
 
 .media-controls{
@@ -168,12 +169,12 @@ video{
   background: white;
 }
 
-.gallery{
+.gallery-button{
   height: 100px;
   width: 130px;
 }
 
-.gallery:hover{
+.gallery-button:hover{
   height: 105px;
   width: 135px;
 }

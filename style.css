@@ -101,18 +101,6 @@ video{
   animation: scaleUpDown 1s 1;
 }
 
-@keyframes scaleUpDown{
-  0%{
-    transform: scale(1);
-  }
-  50%{
-    transform: scale(0.8);
-  }
-  100%{
-    transform: scale(1);
-  }
-}
-
 .filter-controls{
   height: 500px;
   width: 130px;
@@ -124,10 +112,10 @@ video{
   align-items: center;
   position: absolute;
 }
+
 .filter-controls>div{
   height: 100px;
   width: 130px;
-  
 }
 
 .testImage{
@@ -145,7 +133,6 @@ video{
 
 .filter2{
   filter: sepia(100%) drop-shadow(16px 16px 10px black);
-
 }
 
 .filter3{
@@ -160,21 +147,83 @@ video{
   filter: grayscale(100%)
 }
 
-.gallery-container{
-  height: 100px;
-  width: 130px;
-  top: 75%;
-  right: 50px;
-  position: absolute;
-  background: white;
-}
-
 .gallery-button{
-  height: 100px;
-  width: 130px;
+    position: absolute;
+    top: 85%;
+    left: 90%;
+    background: black;
+    color: white;
+    height: 70px;
+    width: 70px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    border: 5px solid;
 }
 
 .gallery-button:hover{
-  height: 105px;
-  width: 135px;
+  height: 75px;
+  width: 75px;
+}
+
+
+@keyframes scaleUpDown{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(0.8);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+@media (max-width:600px){
+  .media-controls {
+      height: 240px;
+      width: 280px;
+      position: absolute;
+      top: 74%;
+      left: 22%;
+      flex-direction: row;
+  }
+  .gallery-button{
+      top: 90%;
+      left: 80%;
+      height: 45px;
+      width: 45px;
+      border: 2px solid;
+  }
+
+  .filter-controls{
+    height: 15%;
+    width: 90%;
+    top: 30px;
+    left:40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+  }
+
+  .filter-controls>div{
+    height: 90%;
+    width: 50%;
+  }
+
+  .testImage{
+    height: 100%;
+    width: 90%;
+  }
+  .filters:hover{
+    height: 100%;
+    width: 60%;
+  }
+  
 }

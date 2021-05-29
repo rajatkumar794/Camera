@@ -1,4 +1,10 @@
 let gallery = document.querySelector(".gallery")
+let backBtn = document.querySelector(".back-btn");
+
+backBtn.addEventListener("click" , function(){
+    window.location.assign("index.html");
+})
+
 
 let iv = setInterval( function(){
     if(db){
